@@ -7,6 +7,91 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <!-- Barra de controls -->
+            <ColumnDefinition Width="*" />
+            <!-- Panell Kanban -->
+        </Grid.ColumnDefinitions>
 
+        <!-- Barra de controls a la dreta -->
+        <StackPanel Grid.Column="1" Background="LightGray" Margin="408,0,0,0">
+            <TextBlock Text="Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" />
+            <Button Content="Mou a En procés" Margin="5,5,5,10"
+                Command="{Binding MouAEnProcesCommand}" />
+            <Button Content="Mou a Fet" Margin="5,5,5,10"
+                Command="{Binding MouAFetCommand}" />
+            <Button Content="Mou a Per fer" Margin="5,5,5,10"
+                Command="{Binding MouAPerFerCommand}" />
+        </StackPanel>
+
+        <!-- Panell Kanban a la dreta -->
+        <Grid Grid.Column="0" Margin="10,10,197,10" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Columna "Per fer" -->
+            <StackPanel Grid.Column="0" Margin="5">
+                <TextBlock Text="Per fer" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <ItemsControl ItemsSource="{Binding TasquesPerFer}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <Button Content="Selecciona" Margin="0,5,0,0" 
+                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Columna "En procés" -->
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="En procés" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <ItemsControl ItemsSource="{Binding TasquesEnProces}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <Button Content="Selecciona" Margin="0,5,0,0" 
+                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Columna "Fet" -->
+            <StackPanel Grid.Column="2" Margin="5">
+                <TextBlock Text="Fet" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <ItemsControl ItemsSource="{Binding TasquesFet}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <Button Content="Selecciona" Margin="0,5,0,0" 
+                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
