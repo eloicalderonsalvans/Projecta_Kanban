@@ -15,14 +15,30 @@
         </Grid.ColumnDefinitions>
 
         <!-- Barra de controls a la dreta -->
-        <StackPanel Grid.Column="1" Background="LightGray" Margin="408,0,0,0">
-            <TextBlock Text="Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" />
-            <Button Content="Mou a En procés" Margin="5,5,5,10"
-                Command="{Binding MouAEnProcesCommand}" />
-            <Button Content="Mou a Fet" Margin="5,5,5,10"
-                Command="{Binding MouAFetCommand}" />
-            <Button Content="Mou a Per fer" Margin="5,5,5,10"
-                Command="{Binding MouAPerFerCommand}" />
+        <StackPanel Grid.Column="1" Margin="408,10,10,10">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Width" Value="100" />
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="Margin" Value="0 5" />
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBox x:Name="TaskTextBox" Width="150" Margin="0 0 0 10" Text="Enter Task"/>
+            <TextBox x:Name="DescriptionTextBox" Width="150" Margin="0 0 0 10" Text="Enter Description"/>
+            <ComboBox x:Name="PriorityComboBox" Width="150" Margin="0 0 0 10" >
+                <ComboBoxItem Content="High" Background="Red"/>
+                <ComboBoxItem Content="Medium" Background="Orange"/>
+                <ComboBoxItem Content="Low" Background="Green"/>
+            </ComboBox>
+            <ComboBox x:Name="StatusComboBox" Width="150" Margin="0 0 0 10" >
+                <ComboBoxItem Content="To Do" Background="Yellow"/>
+                <ComboBoxItem Content="Doing" Background="Aqua"/>
+                <ComboBoxItem Content="Done" Background="DarkGray"/>
+            </ComboBox>
+            <Button Content="Delete Task" Click="DeleteTask_Click" Background="#FFFF5656"/>
+            <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue"/>
+            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
         </StackPanel>
 
         <!-- Panell Kanban a la dreta -->
@@ -35,17 +51,17 @@
 
             <!-- Columna "Per fer" -->
             <StackPanel Grid.Column="0" Margin="5">
-                <TextBlock Text="Per fer" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="To do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
                 <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
                                     <Button Content="Selecciona" Margin="0,5,0,0" 
-                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                        CommandParameter="{Binding}" />
+                            Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                            CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -55,7 +71,7 @@
 
             <!-- Columna "En procés" -->
             <StackPanel Grid.Column="1" Margin="5">
-                <TextBlock Text="En procés" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
                 <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -75,7 +91,7 @@
 
             <!-- Columna "Fet" -->
             <StackPanel Grid.Column="2" Margin="5">
-                <TextBlock Text="Fet" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
                 <ItemsControl ItemsSource="{Binding TasquesFet}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

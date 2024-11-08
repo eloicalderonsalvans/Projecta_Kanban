@@ -70,5 +70,59 @@ namespace Projecta_Kanban
             // Afegeix la tasca a la nova columna
             novaColumna.Add(tasca);
         }
+
+        private void AddTask_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TaskTextBox.Text) || string.IsNullOrEmpty(DescriptionTextBox.Text)) return;
+
+            var newTask = new Tasca
+            {
+                Nom = TaskTextBox.Text,
+                Descripcio = DescriptionTextBox.Text,
+                Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet"
+            };
+
+            if (newTask.Estat == "Per fer") TasquesPerFer.Add(newTask);
+            else if (newTask.Estat == "En procés") TasquesEnProces.Add(newTask);
+            else if (newTask.Estat == "Fet") TasquesFet.Add(newTask);
+        }
+
+        private void DeleteTask_Click(object sender, RoutedEventArgs e)
+        {
+            if (tascaSeleccionada == null) return;
+
+            if (TasquesPerFer.Contains(tascaSeleccionada)) TasquesPerFer.Remove(tascaSeleccionada);
+            else if (TasquesEnProces.Contains(tascaSeleccionada)) TasquesEnProces.Remove(tascaSeleccionada);
+            else if (TasquesFet.Contains(tascaSeleccionada)) TasquesFet.Remove(tascaSeleccionada);
+
+            tascaSeleccionada = null;
+        }
+
+        private void ModifyTask_Click(object sender, RoutedEventArgs e)
+        {
+            if (tascaSeleccionada == null || string.IsNullOrEmpty(TaskTextBox.Text) || string.IsNullOrEmpty(DescriptionTextBox.Text)) return;
+
+            tascaSeleccionada.Nom = TaskTextBox.Text;
+            tascaSeleccionada.Descripcio = DescriptionTextBox.Text;
+            tascaSeleccionada.Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet";
+
+            // Move the task to the correct column if the status has changed
+            if (TasquesPerFer.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Per fer")
+            {
+                TasquesPerFer.Remove(tascaSeleccionada);
+                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "En procés" ? TasquesEnProces : TasquesFet);
+            }
+            else if (TasquesEnProces.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "En procés")
+            {
+                TasquesEnProces.Remove(tascaSeleccionada);
+                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "Per fer" ? TasquesPerFer : TasquesFet);
+            }
+            else if (TasquesFet.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Fet")
+            {
+                TasquesFet.Remove(tascaSeleccionada);
+                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "Per fer" ? TasquesPerFer : TasquesEnProces);
+            }
+        }
+
     }
 }

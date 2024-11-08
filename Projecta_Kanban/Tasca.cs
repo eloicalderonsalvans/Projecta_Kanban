@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Projecta_Kanban
 {
@@ -14,6 +15,7 @@ namespace Projecta_Kanban
         public string Estat { get; set; } // "Per fer", "En procés", "Fet"
 
         private bool _isSelected;
+        
         public bool IsSelected
         {
             get => _isSelected;
