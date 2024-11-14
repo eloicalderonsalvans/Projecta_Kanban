@@ -41,7 +41,7 @@
             <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
         </StackPanel>
 
-        <!-- Panell Kanban a la dreta -->
+        <!-- Panell Kanban a l'equerra -->
         <Grid Grid.Column="0" Margin="10,10,197,10" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -51,7 +51,7 @@
 
             <!-- Columna "Per fer" -->
             <StackPanel Grid.Column="0" Margin="5">
-                <TextBlock Text="To do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="To do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
                 <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -59,9 +59,15 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <ComboBox x:Name="combo" Width="159">
+                                        <Button Content="To do" Command="{Binding MouAPerFerCommand}" />
+                                        <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
+                                        <Button Content="Done" Command="{Binding MouAFetCommand}" />
+                                    </ComboBox>
+                                    
                                     <Button Content="Selecciona" Margin="0,5,0,0" 
-                            Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                            CommandParameter="{Binding}" />
+                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -75,13 +81,13 @@
                 <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
                                     <Button Content="Selecciona" Margin="0,5,0,0" 
-                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                        CommandParameter="{Binding}" />
+                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -95,13 +101,13 @@
                 <ItemsControl ItemsSource="{Binding TasquesFet}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
                                     <Button Content="Selecciona" Margin="0,5,0,0" 
-                                        Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                        CommandParameter="{Binding}" />
+                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

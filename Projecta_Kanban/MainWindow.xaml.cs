@@ -36,9 +36,6 @@ namespace Projecta_Kanban
             TasquesEnProces = new ObservableCollection<Tasca>();
             TasquesFet = new ObservableCollection<Tasca>();
 
-            // Exemple de tasques inicials
-            TasquesPerFer.Add(new Tasca { Nom = "Tasca 1", Descripcio = "Descripció de la tasca 1", Estat = "Per fer" });
-            TasquesPerFer.Add(new Tasca { Nom = "Tasca 2", Descripcio = "Descripció de la tasca 2", Estat = "Per fer" });
 
             // Comandes
             MouAEnProcesCommand = new RelayCommand(_ => MoureTasca(tascaSeleccionada, TasquesEnProces));
@@ -79,7 +76,8 @@ namespace Projecta_Kanban
             {
                 Nom = TaskTextBox.Text,
                 Descripcio = DescriptionTextBox.Text,
-                Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet"
+                Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet",
+                Background = GetPriorityColor(PriorityComboBox.Text)
             };
 
             if (newTask.Estat == "Per fer") TasquesPerFer.Add(newTask);
@@ -105,8 +103,8 @@ namespace Projecta_Kanban
             tascaSeleccionada.Nom = TaskTextBox.Text;
             tascaSeleccionada.Descripcio = DescriptionTextBox.Text;
             tascaSeleccionada.Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet";
+            tascaSeleccionada.Background = GetPriorityColor(PriorityComboBox.Text);
 
-            // Move the task to the correct column if the status has changed
             if (TasquesPerFer.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Per fer")
             {
                 TasquesPerFer.Remove(tascaSeleccionada);
@@ -122,6 +120,16 @@ namespace Projecta_Kanban
                 TasquesFet.Remove(tascaSeleccionada);
                 MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "Per fer" ? TasquesPerFer : TasquesEnProces);
             }
+        }
+        private Brush GetPriorityColor(string priority)
+        {
+            return priority switch
+            {
+                "High" => Brushes.Red,
+                "Medium" => Brushes.Orange,
+                "Low" => Brushes.Green,
+                _ => Brushes.Transparent
+            };
         }
 
     }

@@ -25,6 +25,16 @@ namespace Projecta_Kanban
                 OnPropertyChanged(nameof(IsSelected));
             }
         }
+        private Brush _background;
+        public Brush Background
+        {
+            get => _background;
+            set
+            {
+                _background = value;
+                OnPropertyChanged(nameof(Background));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
