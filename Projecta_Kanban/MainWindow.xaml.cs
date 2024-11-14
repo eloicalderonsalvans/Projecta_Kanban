@@ -87,13 +87,15 @@ namespace Projecta_Kanban
 
         private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            if (tascaSeleccionada == null) return;
+            var button = (Button)sender;
+            var TascaPerEliminar = button?.CommandParameter as Tasca;
 
-            if (TasquesPerFer.Contains(tascaSeleccionada)) TasquesPerFer.Remove(tascaSeleccionada);
-            else if (TasquesEnProces.Contains(tascaSeleccionada)) TasquesEnProces.Remove(tascaSeleccionada);
-            else if (TasquesFet.Contains(tascaSeleccionada)) TasquesFet.Remove(tascaSeleccionada);
+            if (TascaPerEliminar == null) return;
 
-            tascaSeleccionada = null;
+            if(TasquesPerFer.Contains(TascaPerEliminar)) TasquesPerFer.Remove(TascaPerEliminar);
+            else if (TasquesEnProces.Contains(TascaPerEliminar)) TasquesEnProces.Remove(TascaPerEliminar);
+            else if (TasquesFet.Contains(TascaPerEliminar)) TasquesFet.Remove(TascaPerEliminar);
+
         }
 
         private void ModifyTask_Click(object sender, RoutedEventArgs e)

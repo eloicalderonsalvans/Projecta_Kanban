@@ -15,7 +15,7 @@ namespace Projecta_Kanban
         public string Estat { get; set; } // "Per fer", "En procés", "Fet"
 
         private bool _isSelected;
-        
+
         public bool IsSelected
         {
             get => _isSelected;
