@@ -8,40 +8,50 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="0" />
             <!-- Barra de controls -->
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="477*" />
+            <ColumnDefinition Width="323*"/>
             <!-- Panell Kanban -->
         </Grid.ColumnDefinitions>
 
         <!-- Barra de controls a la dreta -->
-        <StackPanel Grid.Column="1" Margin="434,10,10,10">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="100" />
-                    <Setter Property="Height" Value="30" />
-                    <Setter Property="Margin" Value="0 5" />
-                </Style>
-            </StackPanel.Resources>
+        <Grid Margin="0,0,8,0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="377*"/>
+                <ColumnDefinition Width="39*"/>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="42*"/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="94,8,-325,10" Grid.Column="4">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="100" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Margin" Value="0 5" />
+                    </Style>
+                </StackPanel.Resources>
 
-            <TextBox x:Name="TaskTextBox" Width="150" Margin="0 0 0 10" Text="Enter Task"/>
-            <TextBox x:Name="DescriptionTextBox" Width="150" Margin="0 0 0 10" Text="Enter Description"/>
-            <ComboBox x:Name="PriorityComboBox" Width="150" Margin="0 0 0 10" >
-                <ComboBoxItem Content="High" Background="Red"/>
-                <ComboBoxItem Content="Medium" Background="Orange"/>
-                <ComboBoxItem Content="Low" Background="Green"/>
-            </ComboBox>
-            <ComboBox x:Name="StatusComboBox" Width="150" Margin="0 0 0 10" >
-                <ComboBoxItem Content="To Do" Background="Yellow"/>
-                <ComboBoxItem Content="Doing" Background="Aqua"/>
-                <ComboBoxItem Content="Done" Background="DarkGray"/>
-            </ComboBox>
-            <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue"/>
-            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
-        </StackPanel>
+                <TextBox x:Name="TaskTextBox" Width="150" Margin="0 0 0 10" Text="Enter Task"/>
+                <TextBox x:Name="DescriptionTextBox" Width="150" Margin="0 0 0 10" Text="Enter Description"/>
+                <ComboBox x:Name="PriorityComboBox" Width="150" Margin="0 0 0 10" >
+                    <ComboBoxItem Content="High" Background="Red"/>
+                    <ComboBoxItem Content="Medium" Background="Orange"/>
+                    <ComboBoxItem Content="Low" Background="Green"/>
+                </ComboBox>
+                <ComboBox x:Name="StatusComboBox" Width="150" Margin="0 0 0 10" >
+                    <ComboBoxItem Content="To Do" Background="Yellow"/>
+                    <ComboBoxItem Content="Doing" Background="Aqua"/>
+                    <ComboBoxItem Content="Done" Background="DarkGray"/>
+                </ComboBox>
+                <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue"/>
+                <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
+            </StackPanel>
+        </Grid>
 
         <!-- Panell Kanban a l'equerra -->
-        <Grid Grid.Column="0" Margin="10,10,197,10" Grid.ColumnSpan="2">
+        <Grid Grid.Column="1" Margin="1,10,7,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

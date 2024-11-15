@@ -15,7 +15,7 @@ namespace Projecta_Kanban
         // Constructor amb només acció
         public RelayCommand(Action<object> execute) : this(execute, null) { }
 
-        // Constructor complet amb funció `canExecute`
+        // Constructor complet amb funció: canExecute
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
