@@ -79,6 +79,7 @@ namespace Projecta_Kanban
                 Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet",
                 Background = GetPriorityColor(PriorityComboBox.Text)
             };
+            if (string.IsNullOrEmpty(StatusComboBox.Text)) return;
 
             if (newTask.Estat == "Per fer") TasquesPerFer.Add(newTask);
             else if (newTask.Estat == "En procés") TasquesEnProces.Add(newTask);
