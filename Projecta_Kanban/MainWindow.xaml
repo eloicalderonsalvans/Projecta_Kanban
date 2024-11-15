@@ -5,25 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
-            <!-- Panel Kanban occupies most of the screen -->
             <ColumnDefinition Width="3*" />
-            <!-- Control panel adapts its width but remains smaller -->
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Panel Kanban (Left side) -->
+        <!-- Panel Kanban -->
         <Grid Grid.Column="0" Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="193*" />
+                <ColumnDefinition Width="24*" />
+                <ColumnDefinition Width="169*"/>
+                <ColumnDefinition Width="193*" />
             </Grid.ColumnDefinitions>
 
-            <!-- "To Do" Column -->
-            <StackPanel Grid.Column="0" Margin="5">
-                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+            <!-- "To Do" Columna -->
+            <StackPanel Grid.Column="0" Margin="5,5,5,5" Background="#B2FFFFFF">
+                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Tomato" />
                 <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -31,11 +30,6 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <ComboBox Width="159">
-                                        <Button Content="To Do" Command="{Binding MouAPerFerCommand}" />
-                                        <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
-                                        <Button Content="Done" Command="{Binding MouAFetCommand}" />
-                                    </ComboBox>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -44,9 +38,9 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!-- "Doing" Column -->
-            <StackPanel Grid.Column="1" Margin="5">
-                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+            <!-- "Doing" Columna -->
+            <StackPanel Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2" Background="#B2FFFFFF">
+                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Gold"/>
                 <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -54,11 +48,6 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <ComboBox Width="159">
-                                        <Button Content="To Do" Command="{Binding MouAPerFerCommand}" />
-                                        <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
-                                        <Button Content="Done" Command="{Binding MouAFetCommand}" />
-                                    </ComboBox>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -67,9 +56,9 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!-- "Done" Column -->
-            <StackPanel Grid.Column="2" Margin="5">
-                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+            <!-- "Done" Columna -->
+            <StackPanel Grid.Column="3" Margin="5,5,5,5" Background="#B2FFFFFF">
+                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="LightBlue"/>
                 <ItemsControl ItemsSource="{Binding TasquesFet}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -77,11 +66,6 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <ComboBox Width="159">
-                                        <Button Content="To Do" Command="{Binding MouAPerFerCommand}" />
-                                        <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
-                                        <Button Content="Done" Command="{Binding MouAFetCommand}" />
-                                    </ComboBox>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -91,7 +75,7 @@
             </StackPanel>
         </Grid>
 
-        <!-- Control Panel (Right side) -->
+        <!-- Control Panell -->
         <StackPanel Grid.Column="1" Background="LightGray" Margin="10,0,0,0">
             <StackPanel.Resources>
                 <Style TargetType="Button">
@@ -105,20 +89,20 @@
                 </Style>
             </StackPanel.Resources>
 
-            <TextBox x:Name="TaskTextBox" Text="Enter Task" />
-            <TextBox x:Name="DescriptionTextBox" Text="Enter Description" />
-            <ComboBox x:Name="PriorityComboBox">
+            <TextBox x:Name="TaskTextBox" Text="Enter Task" Margin="0,15,0,10"/>
+            <TextBox x:Name="DescriptionTextBox" Text="Enter Description" Margin="0,0,0,10"/>
+            <ComboBox x:Name="PriorityComboBox" Margin="0,0,0,10" Width="150">
                 <ComboBoxItem Content="High" Background="Red" />
                 <ComboBoxItem Content="Medium" Background="Orange" />
                 <ComboBoxItem Content="Low" Background="Green" />
             </ComboBox>
-            <ComboBox x:Name="StatusComboBox">
+            <ComboBox x:Name="StatusComboBox" Margin="0,0,0,10" Width="150">
                 <ComboBoxItem Content="To Do" Background="Yellow" />
                 <ComboBoxItem Content="Doing" Background="Aqua" />
                 <ComboBoxItem Content="Done" Background="DarkGray" />
             </ComboBox>
-            <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue" />
-            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen" />
+            <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue" Margin="0,0,0,10" />
+            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen" Margin="0,0,0,10"/>
         </StackPanel>
     </Grid>
 </Window>
