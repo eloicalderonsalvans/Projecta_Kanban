@@ -1,0 +1,36 @@
+<Window x:Class="Projecta_Kanban.EditTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Task" Height="250" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Task Name:" Grid.Row="0" VerticalAlignment="Center" />
+        <TextBox x:Name="TaskNameTextBox" Grid.Row="0" Margin="100,0,0,10" Width="200" />
+
+        <TextBlock Text="Description:" Grid.Row="1" VerticalAlignment="Center" />
+        <TextBox x:Name="DescriptionTextBox" Grid.Row="1" Margin="100,0,0,10" Width="200" />
+
+        <TextBlock Text="Priority:" Grid.Row="2" VerticalAlignment="Center" />
+        <ComboBox x:Name="PriorityComboBox" Grid.Row="2" Margin="100,0,0,10" Width="200">
+            <ComboBoxItem Content="High" />
+            <ComboBoxItem Content="Medium" />
+            <ComboBoxItem Content="Low" />
+        </ComboBox>
+
+        <TextBlock Text="Status:" Grid.Row="3" VerticalAlignment="Center" />
+        <ComboBox x:Name="StatusComboBox" Grid.Row="3" Margin="100,0,0,10" Width="200">
+            <ComboBoxItem Content="To Do" />
+            <ComboBoxItem Content="Doing" />
+            <ComboBoxItem Content="Done" />
+        </ComboBox>
+
+        <Button Content="Save" Grid.Row="4" HorizontalAlignment="Right" Margin="0,10,10,0" Width="80" Click="SaveButton_Click" />
+    </Grid>
+</Window>

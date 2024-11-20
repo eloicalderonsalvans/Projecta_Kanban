@@ -49,11 +49,31 @@ namespace Projecta_Kanban
         private void SeleccionaTasca(Tasca tasca)
         {
             tascaSeleccionada = tasca;
-            // Actualitza l'estat de selecció
+
+            // Actualitzem els camps de text amb les dades de la tasca seleccionada
+            TaskTextBox.Text = tascaSeleccionada.Nom;
+            DescriptionTextBox.Text = tascaSeleccionada.Descripcio;
+
+            // Actualitzem l'índex de l'ComboBox de l'estat
+            StatusComboBox.SelectedIndex = tascaSeleccionada.Estat switch
+            {
+                "Per fer" => 0,
+                "En procés" => 1,
+                "Fet" => 2,
+                _ => -1
+            };
+
+            // Actualitzem l'índex del ComboBox de prioritat
+            PriorityComboBox.SelectedIndex = tascaSeleccionada.Background == Brushes.Red ? 0 :
+                                              tascaSeleccionada.Background == Brushes.Orange ? 1 :
+                                              tascaSeleccionada.Background == Brushes.Green ? 2 : -1;
+
+            // Marca la tasca seleccionada com a seleccionada a les llistes
             TasquesPerFer.ToList().ForEach(t => t.IsSelected = t == tasca);
             TasquesEnProces.ToList().ForEach(t => t.IsSelected = t == tasca);
             TasquesFet.ToList().ForEach(t => t.IsSelected = t == tasca);
         }
+
 
         private void MoureTasca(Tasca tasca, ObservableCollection<Tasca> novaColumna)
         {
@@ -87,40 +107,47 @@ namespace Projecta_Kanban
 
         private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            if (tascaSeleccionada == null) return;
+            var button = (Button)sender;
+            var TascaPerEliminar = button?.CommandParameter as Tasca;
 
-            if (TasquesPerFer.Contains(tascaSeleccionada)) TasquesPerFer.Remove(tascaSeleccionada);
-            else if (TasquesEnProces.Contains(tascaSeleccionada)) TasquesEnProces.Remove(tascaSeleccionada);
-            else if (TasquesFet.Contains(tascaSeleccionada)) TasquesFet.Remove(tascaSeleccionada);
+            if (TascaPerEliminar == null) return;
 
-            tascaSeleccionada = null;
+            if (TasquesPerFer.Contains(TascaPerEliminar)) TasquesPerFer.Remove(TascaPerEliminar);
+            else if (TasquesEnProces.Contains(TascaPerEliminar)) TasquesEnProces.Remove(TascaPerEliminar);
+            else if (TasquesFet.Contains(TascaPerEliminar)) TasquesFet.Remove(TascaPerEliminar);
+
         }
-
         private void ModifyTask_Click(object sender, RoutedEventArgs e)
         {
-            if (tascaSeleccionada == null || string.IsNullOrEmpty(TaskTextBox.Text) || string.IsNullOrEmpty(DescriptionTextBox.Text)) return;
-
-            tascaSeleccionada.Nom = TaskTextBox.Text;
-            tascaSeleccionada.Descripcio = DescriptionTextBox.Text;
-            tascaSeleccionada.Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet";
-            tascaSeleccionada.Background = GetPriorityColor(PriorityComboBox.Text);
-
-            if (TasquesPerFer.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Per fer")
+            if (tascaSeleccionada == null)
             {
-                TasquesPerFer.Remove(tascaSeleccionada);
-                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "En procés" ? TasquesEnProces : TasquesFet);
+                MessageBox.Show("Please select a task to modify.");
+                return;
             }
-            else if (TasquesEnProces.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "En procés")
+
+            // Obrir la finestra emergent amb la tasca seleccionada
+            var editWindow = new EditTaskWindow(tascaSeleccionada);
+            if (editWindow.ShowDialog() == true)
             {
-                TasquesEnProces.Remove(tascaSeleccionada);
-                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "Per fer" ? TasquesPerFer : TasquesFet);
+                // La finestra emergent retorna "true" quan l'usuari guarda els canvis
+                MessageBox.Show("Task updated successfully.");
             }
-            else if (TasquesFet.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Fet")
+            else
             {
-                TasquesFet.Remove(tascaSeleccionada);
-                MoureTasca(tascaSeleccionada, tascaSeleccionada.Estat == "Per fer" ? TasquesPerFer : TasquesEnProces);
+                MessageBox.Show("Task update canceled.");
             }
         }
+
+        private void OnTaskClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is Tasca tasca)
+            {
+                
+                SeleccionaTasca(tasca);
+            }
+        }
+
+
         private Brush GetPriorityColor(string priority)
         {
             return priority switch

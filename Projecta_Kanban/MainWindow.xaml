@@ -1,119 +1,125 @@
-﻿<Window x:Class="Projecta_Kanban.MainWindow"
+﻿ <Window x:Class="Projecta_Kanban.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projecta_Kanban"
+        xmlns:local="clr-namespace:Projecta_Kanban"  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"><Grid>
+            
+            
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200" />
+        <!-- Barra de controls -->
+        <ColumnDefinition Width="*" />
+        <!-- Panell Kanban -->
+    </Grid.ColumnDefinitions>
+
+    <!-- Barra de controls a la dreta -->
+    <StackPanel Grid.Column="1" Margin="434,10,10,10">
+        <StackPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Margin" Value="0 5" />
+            </Style>
+        </StackPanel.Resources>
+
+        <TextBox x:Name="TaskTextBox" Width="150" Margin="0 0 0 10" Text="Enter Task"/>
+        <TextBox x:Name="DescriptionTextBox" Width="150" Margin="0 0 0 10" Text="Enter Description"/>
+        <ComboBox x:Name="PriorityComboBox" Width="150" Margin="0 0 0 10" >
+            <ComboBoxItem Content="High" Background="Red"/>
+            <ComboBoxItem Content="Medium" Background="Orange"/>
+            <ComboBoxItem Content="Low" Background="Green"/>
+        </ComboBox>
+        <ComboBox x:Name="StatusComboBox" Width="150" Margin="0 0 0 10" >
+            <ComboBoxItem Content="To Do" Background="Yellow"/>
+            <ComboBoxItem Content="Doing" Background="Aqua"/>
+            <ComboBoxItem Content="Done" Background="DarkGray"/>
+        </ComboBox>
+        <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue"/>
+        <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
+    </StackPanel>
+
+    <!-- Panell Kanban a l'equerra -->
+    <Grid Grid.Column="0" Margin="10,10,197,10" Grid.ColumnSpan="2">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <!-- Barra de controls -->
             <ColumnDefinition Width="*" />
-            <!-- Panell Kanban -->
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Barra de controls a la dreta -->
-        <StackPanel Grid.Column="1" Margin="408,10,10,10">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="100" />
-                    <Setter Property="Height" Value="30" />
-                    <Setter Property="Margin" Value="0 5" />
-                </Style>
-            </StackPanel.Resources>
-
-            <TextBox x:Name="TaskTextBox" Width="150" Margin="0 0 0 10" Text="Enter Task"/>
-            <TextBox x:Name="DescriptionTextBox" Width="150" Margin="0 0 0 10" Text="Enter Description"/>
-            <ComboBox x:Name="PriorityComboBox" Width="150" Margin="0 0 0 10" >
-                <ComboBoxItem Content="High" Background="Red"/>
-                <ComboBoxItem Content="Medium" Background="Orange"/>
-                <ComboBoxItem Content="Low" Background="Green"/>
-            </ComboBox>
-            <ComboBox x:Name="StatusComboBox" Width="150" Margin="0 0 0 10" >
-                <ComboBoxItem Content="To Do" Background="Yellow"/>
-                <ComboBoxItem Content="Doing" Background="Aqua"/>
-                <ComboBoxItem Content="Done" Background="DarkGray"/>
-            </ComboBox>
-            <Button Content="Delete Task" Click="DeleteTask_Click" Background="#FFFF5656"/>
-            <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue"/>
-            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
+        <!-- Columna "Per fer" -->
+        <StackPanel Grid.Column="0" Margin="5">
+            <TextBlock Text="To do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <ItemsControl ItemsSource="{Binding TasquesPerFer}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" >
+                            <StackPanel>
+                                <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                <ComboBox x:Name="combo" Width="159">
+                                    <Button Content="To do" Command="{Binding MouAPerFerCommand}"/>
+                                    <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
+                                    <Button Content="Done" Command="{Binding MouAFetCommand}" />
+                                </ComboBox>
+                                
+                                <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
-        <!-- Panell Kanban a l'equerra -->
-        <Grid Grid.Column="0" Margin="10,10,197,10" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <!-- Columna "En procés" -->
+        <StackPanel Grid.Column="1" Margin="5">
+            <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+            <ItemsControl ItemsSource="{Binding TasquesEnProces}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" >
+                            <StackPanel>
+                                <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                <ComboBox x:Name="combo" Width="159">
+                                    <Button Content="To do" Command="{Binding MouAPerFerCommand}" />
+                                    <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
+                                    <Button Content="Done" Command="{Binding MouAFetCommand}" />
+                                </ComboBox>
+                                <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
-            <!-- Columna "Per fer" -->
-            <StackPanel Grid.Column="0" Margin="5">
-                <TextBlock Text="To do" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <ItemsControl ItemsSource="{Binding TasquesPerFer}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <ComboBox x:Name="combo" Width="159">
-                                        <Button Content="To do" Command="{Binding MouAPerFerCommand}" />
-                                        <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
-                                        <Button Content="Done" Command="{Binding MouAFetCommand}" />
-                                    </ComboBox>
-                                    
-                                    <Button Content="Selecciona" Margin="0,5,0,0" 
-                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-
-            <!-- Columna "En procés" -->
-            <StackPanel Grid.Column="1" Margin="5">
-                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-                <ItemsControl ItemsSource="{Binding TasquesEnProces}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <Button Content="Selecciona" Margin="0,5,0,0" 
-                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-
-            <!-- Columna "Fet" -->
-            <StackPanel Grid.Column="2" Margin="5">
-                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-                <ItemsControl ItemsSource="{Binding TasquesFet}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <Button Content="Selecciona" Margin="0,5,0,0" 
-                Command="{Binding DataContext.SeleccionaTascaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </Grid>
+        <!-- Columna "Fet" -->
+        <StackPanel Grid.Column="2" Margin="5">
+            <TextBlock Text="Done" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
+            <ItemsControl ItemsSource="{Binding TasquesFet}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" >
+                            <StackPanel>
+                                <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                <ComboBox x:Name="combo" Width="159">
+                                    <Button Content="To do" Command="{Binding MouAPerFerCommand}" />
+                                    <Button Content="Doing" Command="{Binding MouAEnProcesCommand}" />
+                                    <Button Content="Done" Command="{Binding MouAFetCommand}" />
+                                </ComboBox>
+                                <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
+</Grid>
+     
+     
 </Window>

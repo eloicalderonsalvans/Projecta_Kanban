@@ -1,45 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Media;
 
-namespace Projecta_Kanban
+public class Tasca : INotifyPropertyChanged
 {
-    public class Tasca : INotifyPropertyChanged
+    private string _nom;
+    private string _descripcio;
+    private string _estat;
+    private Brush _background;
+    private bool _isSelected;
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public string Nom
     {
-        public string Nom { get; set; }
-        public string Descripcio { get; set; }
-        public string Estat { get; set; } // "Per fer", "En procés", "Fet"
+        get { return _nom; }
+        set { _nom = value; OnPropertyChanged(nameof(Nom)); }
+    }
 
-        private bool _isSelected;
-        
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set
-            {
-                _isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-        private Brush _background;
-        public Brush Background
-        {
-            get => _background;
-            set
-            {
-                _background = value;
-                OnPropertyChanged(nameof(Background));
-            }
-        }
+    public string Descripcio
+    {
+        get { return _descripcio; }
+        set { _descripcio = value; OnPropertyChanged(nameof(Descripcio)); }
+    }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    public string Estat
+    {
+        get { return _estat; }
+        set { _estat = value; OnPropertyChanged(nameof(Estat)); }
+    }
+
+    public Brush Background
+    {
+        get { return _background; }
+        set { _background = value; OnPropertyChanged(nameof(Background)); }
+    }
+
+    public bool IsSelected
+    {
+        get { return _isSelected; }
+        set { _isSelected = value; OnPropertyChanged(nameof(IsSelected)); }
+    }
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
