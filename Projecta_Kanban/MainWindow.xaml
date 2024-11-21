@@ -22,11 +22,11 @@
 
             <!-- "To Do" Columna -->
             <StackPanel Grid.Column="0" Margin="5,5,5,5" Background="#B2FFFFFF">
-                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Tomato" />
+                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Tomato"/>
                 <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" >
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -49,7 +49,7 @@
                 <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -68,11 +68,11 @@
 
             <!-- "Done" Columna -->
             <StackPanel Grid.Column="3" Margin="5,5,5,5" Background="#B2FFFFFF">
-                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="LightBlue"/>
+                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="LightBlue" />
                 <ItemsControl ItemsSource="{Binding TasquesFet}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
