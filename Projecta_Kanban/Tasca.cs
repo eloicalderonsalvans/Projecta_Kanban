@@ -14,6 +14,12 @@ namespace Projecta_Kanban
         public string Descripcio { get; set; }
         public string Estat { get; set; } // "Per fer", "En procés", "Fet"
 
+        public string Responsable {  get; set; }
+
+        public DateTime DataInici {  get; set; } 
+        public DateTime DataFinal { get; set; }
+
+
         private bool _isSelected;
 
         public bool IsSelected

@@ -30,6 +30,11 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <TextBlock Text="{Binding Autor}" FontWeight="Bold"  TextWrapping="Wrap"/>
+                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataInici}"/>
+                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataFinal}"/>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -48,6 +53,11 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <TextBlock Text="{Binding Autor}" FontWeight="Black"  TextWrapping="Wrap"/>
+                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataInici}"/>
+                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataFinal}"/>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -66,6 +76,11 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                    <TextBlock Text="{Binding Autor}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataInici}"/>
+                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding DataFinal}"/>
                                     <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
                                 </StackPanel>
                             </Border>
@@ -101,8 +116,11 @@
                 <ComboBoxItem Content="Doing" Background="Aqua" />
                 <ComboBoxItem Content="Done" Background="DarkGray" />
             </ComboBox>
+            <TextBox x:Name="AutorTextBox" TextWrapping="Wrap" Text="Enter Autor" Width="120"/>
+            <DatePicker x:Name="StartDay"/>
+            <DatePicker x:Name="FinishDay"/>
             <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue" Margin="0,0,0,10" />
-            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen" Margin="0,0,0,10"/>
+            <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -70,12 +70,16 @@ namespace Projecta_Kanban
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TaskTextBox.Text) || string.IsNullOrEmpty(DescriptionTextBox.Text)) return;
+            if (string.IsNullOrEmpty(TaskTextBox.Text) || string.IsNullOrEmpty(DescriptionTextBox.Text)
+                || string.IsNullOrEmpty(AutorTextBox.Text)) return;
 
             var newTask = new Tasca
             {
                 Nom = TaskTextBox.Text,
                 Descripcio = DescriptionTextBox.Text,
+                Responsable = AutorTextBox.Text,
+                DataInici = StartDay.DisplayDate,
+                DataFinal = FinishDay.DisplayDate,
                 Estat = StatusComboBox.Text == "To Do" ? "Per fer" : StatusComboBox.Text == "Doing" ? "En procés" : "Fet",
                 Background = GetPriorityColor(PriorityComboBox.Text)
             };
