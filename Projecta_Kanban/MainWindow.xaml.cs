@@ -178,6 +178,59 @@ namespace Projecta_Kanban
                 _ => Brushes.Transparent
             };
         }
+              
 
+        private void Border_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Border border = sender as Border;
+
+            if (border != null)
+            {
+                var dataContext = border.DataContext;
+                if (dataContext != null)
+                {
+                    DragDrop.DoDragDrop(border,dataContext, DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void StackPanel_Drop(object sender, DragEventArgs e)
+        {
+            // Verifica si el dato arrastrado es del tipo esperado (modelo de datos)
+            if (e.Data.GetDataPresent(typeof(Tasca)))
+            {
+                // Obtén el objeto arrastrado (la tarea)
+                var droppedTask = e.Data.GetData(typeof(Tasca)) as Tasca;
+
+                if (droppedTask == null) return;
+
+                // Identifica el StackPanel de destino
+                var targetStackPanel = sender as StackPanel;
+
+                if (targetStackPanel == null) return;
+
+                // Mueve la tarea a la lista correspondiente según el StackPanel
+                if (targetStackPanel.Name == "ToDoStack")
+                {
+                    MoureTasca(droppedTask, TasquesPerFer);
+                }
+                else if (targetStackPanel.Name == "DoingStack")
+                {
+                    MoureTasca(droppedTask, TasquesEnProces);
+                }
+                else if (targetStackPanel.Name == "DoneStack")
+                {
+                    MoureTasca(droppedTask, TasquesFet);
+                }
+            }
+        }
+
+
+        private void StackPanel_DragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(Border))) return;
+
+            e.Effects = DragDropEffects.Move;
+        }
     }
 }

@@ -21,12 +21,12 @@
             </Grid.ColumnDefinitions>
 
             <!-- "To Do" Columna -->
-            <StackPanel Grid.Column="0" Margin="5,5,5,5" Background="#B2FFFFFF">
-                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Tomato"/>
+            <StackPanel x:Name="ToDoStack" Grid.Column="0" Margin="5,5,5,5" Background="#B2FFFFFF"  AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Tomato"/>
                 <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" >
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -44,12 +44,12 @@
             </StackPanel>
 
             <!-- "Doing" Columna -->
-            <StackPanel Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2" Background="#B2FFFFFF">
-                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="Gold"/>
+            <StackPanel x:Name="DoingStack" Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2" Background="#B2FFFFFF" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Gold"/>
                 <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -67,12 +67,12 @@
             </StackPanel>
 
             <!-- "Done" Columna -->
-            <StackPanel Grid.Column="3" Margin="5,5,5,5" Background="#B2FFFFFF">
-                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Width="183" Background="LightBlue" />
+            <StackPanel  x:Name="DoneStack"  Grid.Column="3" Margin="5,5,5,5" Background="#B2FFFFFF"  AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="LightBlue" />
                 <ItemsControl ItemsSource="{Binding TasquesFet}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked"  PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
