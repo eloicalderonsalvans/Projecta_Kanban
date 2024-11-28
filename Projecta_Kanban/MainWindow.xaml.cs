@@ -54,24 +54,24 @@ namespace Projecta_Kanban
                     TaskTextBox.Text = tascaSeleccionada.Nom;
                     DescriptionTextBox.Text = tascaSeleccionada.Descripcio;
 
-                    // Actualitzem l'índex de l'ComboBox de l'estat
-                    StatusComboBox.SelectedIndex = tascaSeleccionada.Estat switch
-                    {
-                        "Per fer" => 0,
-                        "En procés" => 1,
-                        "Fet" => 2,
-                        _ => -1
-                    };
+                    //// Actualitzem l'índex de l'ComboBox de l'estat
+                    //StatusComboBox.SelectedIndex = tascaSeleccionada.Estat switch
+                    //{
+                    //    "Per fer" => 0,
+                    //    "En procés" => 1,
+                    //    "Fet" => 2,
+                    //    _ => -1
+                    //};
 
                     // Actualitzem l'índex del ComboBox de prioritat
                     PriorityComboBox.SelectedIndex = tascaSeleccionada.Background == Brushes.Red ? 0 :
                                                       tascaSeleccionada.Background == Brushes.Orange ? 1 :
                                                       tascaSeleccionada.Background == Brushes.Green ? 2 : -1;
 
-                    // Marca la tasca seleccionada com a seleccionada a les llistes
-                    TasquesPerFer.ToList().ForEach(t => t.IsSelected = t == tasca);
-                    TasquesEnProces.ToList().ForEach(t => t.IsSelected = t == tasca);
-                    TasquesFet.ToList().ForEach(t => t.IsSelected = t == tasca);
+                    //// Marca la tasca seleccionada com a seleccionada a les llistes
+                    //TasquesPerFer.ToList().ForEach(t => t.IsSelected = t == tasca);
+                    //TasquesEnProces.ToList().ForEach(t => t.IsSelected = t == tasca);
+                    //TasquesFet.ToList().ForEach(t => t.IsSelected = t == tasca);
                 }
 
         private void MoureTasca(Tasca tasca, ObservableCollection<Tasca> novaColumna)
@@ -126,7 +126,6 @@ namespace Projecta_Kanban
         {
             if (tascaSeleccionada == null)
             {
-                MessageBox.Show("Please select a task to modify.");
                 return;
             }
 
@@ -134,7 +133,7 @@ namespace Projecta_Kanban
             var editWindow = new EditTaskWindow(tascaSeleccionada);
             if (editWindow.ShowDialog() == true)
             {
-                // La finestra emergent retorna "true" quan l'usuari guarda els canvis
+                //La finestra emergent retorna "true" quan l'usuari guarda els canvis
                 if (TasquesPerFer.Contains(tascaSeleccionada) && tascaSeleccionada.Estat != "Per fer")
                 {
                     TasquesPerFer.Remove(tascaSeleccionada);
@@ -162,9 +161,7 @@ namespace Projecta_Kanban
         private void OnTaskClicked(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border border && border.DataContext is Tasca tasca)
-            {
-
-                MessageBox.Show("Has selecionat la tasca");
+            {            
                 SeleccionaTasca(tasca);
             }
         }

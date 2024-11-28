@@ -28,14 +28,7 @@
             <ComboBoxItem Content="Medium" />
             <ComboBoxItem Content="Low" />
         </ComboBox>
-
-        <TextBlock Text="Status:" Grid.Row="3" VerticalAlignment="Center" />
-        <ComboBox x:Name="StatusComboBox" Grid.Row="3" Margin="100,0,0,10" Width="200">
-            <ComboBoxItem Content="To Do" />
-            <ComboBoxItem Content="Doing" />
-            <ComboBoxItem Content="Done" />
-        </ComboBox>
-
+        
         <DatePicker x:Name="FinishDay" Margin="0,26,0,-34" Grid.Row="6"/>
 
         <Button Content="Save" Grid.Row="6" HorizontalAlignment="Right" Margin="0,48,160,-68" Width="80" Click="SaveButton_Click" RenderTransformOrigin="0.466,1.496" />
