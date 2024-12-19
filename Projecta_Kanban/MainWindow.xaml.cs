@@ -22,6 +22,7 @@ namespace Projecta_Kanban
         public ObservableCollection<Tasca> TasquesEnProces { get; set; }
         public ObservableCollection<Tasca> TasquesFet { get; set; }
 
+
         public ICommand MouAEnProcesCommand { get; }
         public ICommand MouAFetCommand { get; }
         public ICommand MouAPerFerCommand { get; }
@@ -108,18 +109,13 @@ namespace Projecta_Kanban
             else if (newTask.Estat == "En procés") TasquesEnProces.Add(newTask);
             else if (newTask.Estat == "Fet") TasquesFet.Add(newTask);
         }
-
-        private void DeleteTask_Click(object sender, RoutedEventArgs e)
+        private void DeleteTask(Tasca tasca)
         {
-            var button = (Button)sender;
-            var TascaPerEliminar = button?.CommandParameter as Tasca;
+            if (tasca == null) return;
 
-            if (TascaPerEliminar == null) return;
-
-            if(TasquesPerFer.Contains(TascaPerEliminar)) TasquesPerFer.Remove(TascaPerEliminar);
-            else if (TasquesEnProces.Contains(TascaPerEliminar)) TasquesEnProces.Remove(TascaPerEliminar);
-            else if (TasquesFet.Contains(TascaPerEliminar)) TasquesFet.Remove(TascaPerEliminar);
-
+            if (TasquesPerFer.Contains(tasca)) TasquesPerFer.Remove(tasca);
+            else if (TasquesEnProces.Contains(tasca)) TasquesEnProces.Remove(tasca);
+            else if (TasquesFet.Contains(tasca)) TasquesFet.Remove(tasca);
         }
 
         private void ModifyTask_Click(object sender, RoutedEventArgs e)
@@ -219,6 +215,12 @@ namespace Projecta_Kanban
                 {
                     MoureTasca(droppedTask, TasquesFet);
                 }
+                else if (targetStackPanel.Name == "Delete")
+                {
+                    
+                    DeleteTask(droppedTask);
+                }
+
             }
         }
 

@@ -8,4 +8,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="89ab122fc24241888e74e471d0b407fdmCRPnyXueyNcS0Mz-5.png" />
+    <None Remove="icons8-papelera.gif" />
+    <None Remove="Paparera.gif" />
+    <None Remove="Paparera2.gif" />
+    <None Remove="Papelera de reciclaje.mp4" />
+    <None Remove="Papelera-de-reciclaje.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="89ab122fc24241888e74e471d0b407fdmCRPnyXueyNcS0Mz-5.png" />
+    <Resource Include="icons8-papelera.gif" />
+    <Resource Include="Paparera.gif" />
+    <Resource Include="Paparera2.gif" />
+    <Resource Include="Papelera de reciclaje.mp4" />
+    <Resource Include="Papelera-de-reciclaje.gif" />
+  </ItemGroup>
+
 </Project>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="Black">
@@ -14,80 +15,87 @@
         <!-- Panel Kanban -->
         <Grid Grid.Column="0" Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="193*" />
-                <ColumnDefinition Width="24*" />
-                <ColumnDefinition Width="169*"/>
-                <ColumnDefinition Width="193*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <!-- "To Do" Columna -->
-            <StackPanel x:Name="ToDoStack" Grid.Column="0" Margin="5,5,5,5" Background="#B2FFFFFF"  AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
-                <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Tomato"/>
-                <ItemsControl ItemsSource="{Binding TasquesPerFer}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <TextBlock Text="{Binding Autor}" FontWeight="Bold"  TextWrapping="Wrap"/>
-                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataInici}"/>
-                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataFinal}"/>
-                                    <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <ScrollViewer Grid.Column="0" Margin="5,5,5,5" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="ToDoStack" Background="#B2FFFFFF" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                    <TextBlock Text="To Do" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Tomato"/>
+                    <ItemsControl ItemsSource="{Binding TasquesPerFer}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                        <TextBlock Text="Autor :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Autor}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="Data Inicial :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataInici}"/>
+                                        <TextBlock Text="Data Final :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataFinal}"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- "Doing" Columna -->
-            <StackPanel x:Name="DoingStack" Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2" Background="#B2FFFFFF" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
-                <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Gold"/>
-                <ItemsControl ItemsSource="{Binding TasquesEnProces}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <TextBlock Text="{Binding Autor}" FontWeight="Black"  TextWrapping="Wrap"/>
-                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataInici}"/>
-                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataFinal}"/>
-                                    <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <ScrollViewer Grid.Column="1" Margin="5,5,5,5" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="DoingStack" Background="#B2FFFFFF" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                    <TextBlock Text="Doing" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="Gold"/>
+                    <ItemsControl ItemsSource="{Binding TasquesEnProces}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                        <TextBlock Text="Autor :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Autor}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="Data Inicial :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataInici}"/>
+                                        <TextBlock Text="Data Final :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataFinal}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- "Done" Columna -->
-            <StackPanel  x:Name="DoneStack"  Grid.Column="3" Margin="5,5,5,5" Background="#B2FFFFFF"  AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
-                <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="LightBlue" />
-                <ItemsControl ItemsSource="{Binding TasquesFet}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked"  PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
-                                    <TextBlock Text="{Binding Autor}" TextWrapping="Wrap"/>
-                                    <TextBlock Text="Data Inicial :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataInici}"/>
-                                    <TextBlock Text="Data Final :"  FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding DataFinal}"/>
-                                    <Button Content="Delete" Margin="0,5,0,0" Click="DeleteTask_Click" CommandParameter="{Binding}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <ScrollViewer Grid.Column="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="DoneStack" Background="#B2FFFFFF" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                    <TextBlock Text="Done" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0" Background="LightBlue"/>
+                    <ItemsControl ItemsSource="{Binding TasquesFet}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
+                                        <TextBlock Text="Autor :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Autor}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="Data Inicial :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataInici}"/>
+                                        <TextBlock Text="Data Final :" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding DataFinal}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
 
         <!-- Control Panell -->
@@ -112,15 +120,19 @@
                 <ComboBoxItem Content="Low" Background="Green" />
             </ComboBox>
             <ComboBox x:Name="StatusComboBox" Margin="0,0,0,10" Width="150">
-                <ComboBoxItem Content="To Do" Background="Yellow" />
-                <ComboBoxItem Content="Doing" Background="Aqua" />
-                <ComboBoxItem Content="Done" Background="DarkGray" />
+                <ComboBoxItem Content="To Do" Background="Tomato" />
+                <ComboBoxItem Content="Doing" Background="Gold" />
+                <ComboBoxItem Content="Done" Background="LightBlue" />
             </ComboBox>
             <TextBox x:Name="AutorTextBox" TextWrapping="Wrap" Text="Enter Autor" Width="120"/>
             <DatePicker x:Name="StartDay"/>
             <DatePicker x:Name="FinishDay"/>
             <Button Content="Modify Task" Click="ModifyTask_Click" Background="LightBlue" Margin="0,0,0,10" />
             <Button Content="Add Task" Click="AddTask_Click" Background="LightGreen"/>
+            <StackPanel x:Name="Delete" AllowDrop="True" Drop="StackPanel_Drop" DragOver="StackPanel_DragOver">
+                <Image Height="81" Width="59" gif:ImageBehavior.RepeatBehavior="Forever"
+                       gif:ImageBehavior.AnimatedSource="C:\Users\Usuario\Source\Repos\Projecta_Kanban\Projecta_Kanban\Imatges\Paparera2.gif"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
