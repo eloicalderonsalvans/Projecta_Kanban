@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
+        Loaded="MainWindow_Loaded"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
@@ -28,7 +29,7 @@
                     <ItemsControl ItemsSource="{Binding TasquesPerFer}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding BackgroundColor}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                     <StackPanel>
                                         <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                         <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -54,7 +55,7 @@
                     <ItemsControl ItemsSource="{Binding TasquesEnProces}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding BackgroundColor}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                     <StackPanel>
                                         <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                         <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -79,7 +80,7 @@
                     <ItemsControl ItemsSource="{Binding TasquesFet}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding Background}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                                <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10" Background="{Binding BackgroundColor}" MouseDown="OnTaskClicked" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
                                     <StackPanel>
                                         <TextBlock Text="{Binding Nom}" FontWeight="Bold" />
                                         <TextBlock Text="{Binding Descripcio}" TextWrapping="Wrap" Margin="0,5,0,0" />

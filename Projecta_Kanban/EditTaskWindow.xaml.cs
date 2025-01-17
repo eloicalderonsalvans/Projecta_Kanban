@@ -17,8 +17,8 @@ namespace Projecta_Kanban
             DescriptionTextBox.Text = task.Descripcio;
             AutorTextBox.Text = task.Autor;
             FinishDay.SelectedDate = task.DataFinal;
-            PriorityComboBox.Text = task.Background.ToString() == Brushes.Red.ToString() ? "High" :
-                                    task.Background.ToString() == Brushes.Orange.ToString() ? "Medium" : "Low";
+            PriorityComboBox.Text = task.BackgroundColor.ToString() == Brushes.Red.ToString() ? "High" :
+                                    task.BackgroundColor.ToString() == Brushes.Orange.ToString() ? "Medium" : "Low";
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -27,7 +27,7 @@ namespace Projecta_Kanban
             Task.Descripcio = DescriptionTextBox.Text;
             Task.Autor= AutorTextBox.Text;
             Task.DataFinal = FinishDay.SelectedDate ?? DateTime.MinValue;
-            Task.Background = PriorityComboBox.Text switch
+            Task.BackgroundColor = PriorityComboBox.Text switch
             {
                 "High" => Brushes.Red,
                 "Medium" => Brushes.Orange,

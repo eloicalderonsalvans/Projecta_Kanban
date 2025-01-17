@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -13,7 +14,7 @@ namespace Projecta_Kanban
         private string _nom;
         private string _descripcio;
         private string _estat;
-        private Brush _background;
+        private Brush _backgroundColor;
         private bool _isSelected;
         private string _Autor;
         public DateTime DataInici { get; set; }
@@ -39,12 +40,16 @@ namespace Projecta_Kanban
             set { _estat = value; OnPropertyChanged(nameof(Estat)); }
         }
 
-        public Brush Background
+        public string Background { get; set; }
+
+        [JsonIgnore]
+        public Brush BackgroundColor
         {
-            get { return _background; }
-            set { _background = value; OnPropertyChanged(nameof(Background)); }
+            get { return _backgroundColor; }
+            set { _backgroundColor = value; OnPropertyChanged(nameof(BackgroundColor)); }
         }
 
+        [JsonIgnore]
         public bool IsSelected
         {
             get { return _isSelected; }
